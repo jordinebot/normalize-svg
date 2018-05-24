@@ -1,0 +1,14 @@
+{
+  "name": "normalize-svg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jordinebot/normalize-svg",
+  "author": "Jordi Nebot",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "xmldom": "^0.1.27"
+  }
+}
