@@ -1,6 +1,8 @@
-var path = require('path');
-var fs = require('fs');
-var xmldom = require('xmldom');
+const path = require('path');
+const fs = require('fs');
+const xmldom = require('xmldom');
+const normalize = require('normalize-svg-coords');
+
 /**
  * Promise all
  * @author Loreto Parisi (loretoparisi at gmail dot com)
@@ -58,6 +60,18 @@ readFiles('./data/')
     files.forEach((item, index) => {
       var svg = parser.parseFromString(item.contents, 'image/svg+xml');
       var viewBox = svg.getElementsByTagName('svg')[0].getAttribute('viewBox');
+      var path = svg.getElementsByTagName('path')[0].getAttribute('d');
+      console.log('\n---> Parsing', item.filename);
+      console.log('     Current ViewBox', viewBox);
+      console.log('     Current Path', path);
+      var normalizedPath = normalize({
+        viewBox,
+        path,
+        min: 0,
+        max: 512,
+        asList: false,
+      });
+      console.log('     Normalized Path', normalizedPath);
     });
   })
   .catch(error => {
